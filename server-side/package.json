@@ -1,0 +1,22 @@
+{
+  "name": "Battleship",
+  "version": "0.0.0",
+  "description": "Web app for passing the OOP course.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Nonemoticoner/Battleship"
+  },
+  "author": "Nonemoticoner",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/Nonemoticoner/Battleship/issues"
+  },
+  "dependencies": {
+    "express": "~4.12.3",
+    "path": "~0.11.14"
+  }
+}
