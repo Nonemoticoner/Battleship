@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Battleship</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<!-- start game page -->
+	<div class="container col-lg-6" id="container">
+		
+		<table class="table table-bordered">
+			<!-- tr*10>td*10>button.btn.btn-default>span.glyphicon.glyphicon-pencil -->
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>A</th>
+					<th>B</th>
+					<th>C</th>
+					<th>D</th>
+					<th>E</th>
+					<th>F</th>
+					<th>G</th>
+					<th>H</th>
+					<th>I</th>
+					<th>J</th>
+				</tr>
+            </thead>
+			<tr>
+				<td><strong>0</strong></td>
+				<td>
+					<div class="dropdown row-0 column-A">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-B">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-C">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-D">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-E">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-F">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-G">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-H">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-I">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+				<td>
+					<div class="dropdown column-J">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation" class="dropdown-header">Insert ship starting from here...</li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the right</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">...to the bottom</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><strong>1</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>2</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>3</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>4</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>5</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>6</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>7</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>8</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><strong>9</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+
+	</div> <!-- /container -->
+
+	<!-- Scripts: -->
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<!-- My Script -->
+	<script src="js/locate.js"></script>
+</body>
+</html>
