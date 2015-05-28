@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({
  * CONSTANTS --------------------------------------------------------------------------------------------------------------
  */
 
-class Ship{
-	constructor (x, y, orientation, length) {
+var Ship =(function () {
+	function Ship (x, y, orientation, length) {
 		this.x =x;
 		this.y =y;
 		this.orientation = orientation;	// vertical - true, horizontal - false
@@ -39,18 +39,23 @@ class Ship{
 		}
 	}
 
-	get isDead(){
-		for (var i = this.hp.length - 1; i >= 0; i--) 
-			if (this.hp[i] ==true)
-				return false;
+	{}.defineProperty(Ship.prototype, "isDead", {
+		get: function(){
+			for (var i = this.hp.length - 1; i >= 0; i--) 
+				if (this.hp[i] ==true)
+					return false;
 
-		return true;
-	}
+			return true;
+		},
+		enumerable: true,
+		configurable: true
+	});
 
-}
+	return Ship;
+})();
 
-class Set{
-	constructor(ships =[]){
+var Set =(function () {
+	function Set (ships) {
 		//0 empty space
 		//1 ship
 		//2 killed ship
@@ -65,7 +70,7 @@ class Set{
 					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-		this.ships = ships;
+		this.ships = ships || [];
 
 		// locates all ships on map
 		for (var i = this.ships.length - 1; i >= 0; i--) {
@@ -73,7 +78,7 @@ class Set{
 		}
 	}
 
-	locate(ship){
+	Set.prototype.locate = function(ship) {
 		if(ship.orientation == 'v'){
 			for(int i =0; i <ship.length; i++){
 				try{
@@ -102,20 +107,20 @@ class Set{
 				}
 			}
 		}
-	}
+	
+	};
 
+	return Set;
+})();
 
-}
-
-
-class Player{
-	constructor(nick, status ="pending", set =new Set()){
+var Player =(function () {
+	function Player(nick, status, set){
 		this.nick =nick;
-		this.set =set;
-		this.status = status;	// pending or playing
+		this.set =set || new Set();
+		this.status = status || "pending";	// pending or playing
 	}
 
-	attackedBy(opponent, x, y){
+	Player.prototype.attackedBy = function(opponent, x, y) {
 		if(this.set.map[y][x] ==0){
 			this.set.map[y][x] =3;
 			return 0;
@@ -130,10 +135,10 @@ class Player{
 			return 3;
 		else
 			return -1;		//fail
-	}
+	};
 
-	
-}
+	return Ship;
+})();
 
 
 
@@ -145,7 +150,7 @@ var battles =[],
  * REGISTER ---------------------------------------------------------------------------------------------------------------
  */
 app.post('/register', function (req, res) {
-	
+	console.log(req);
 });
 
 /*
