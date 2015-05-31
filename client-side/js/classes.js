@@ -27,7 +27,7 @@
 			}
 		}
 
-		{}.defineProperty(Ship.prototype, "isDead", {
+		Object.defineProperty(Ship.prototype, "isDead", {
 			get: function(){
 				for (var i = this.hp.length - 1; i >= 0; i--) 
 					if (this.hp[i] ==true)
@@ -49,7 +49,7 @@
 			//2 killed ship
 			//3 missed shot
 			this.map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0].
+						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -68,7 +68,7 @@
 
 		Set.prototype.locate = function(ship) {
 			if(ship.orientation == 'v'){
-				for(int i =0; i <ship.length; i++){
+				for(var i =0; i <ship.length; i++){
 					try{
 						if(this.map[ship.y +i][ship.x] ==0)
 							this.map[ship.y +i][ship.x] =1;
@@ -82,7 +82,7 @@
 				}
 			}
 			else if(ship.orientation == 'h'){
-				for(int i =0; i <ship.length; i++){
+				for(var i =0; i <ship.length; i++){
 					try{
 						if(this.map[ship.y][ship.x +i] ==0)
 							this.map[ship.y][ship.x +1] =1;
@@ -127,6 +127,31 @@
 
 		return Ship;
 	})();
+
+	function letter2digit (letter) {
+		switch(letter){
+			case "A":
+				return 0;
+			case "B":
+				return 1;
+			case "C":
+				return 2;
+			case "D":
+				return 3;
+			case "E":
+				return 4;
+			case "F":
+				return 5;
+			case "G":
+				return 6;
+			case "H":
+				return 7;
+			case "I":
+				return 8;
+			case "J":
+				return 9;
+		}
+	}
 
 // 	Classes.Ship = Ship;
 // 	Classes.Set = Set;
