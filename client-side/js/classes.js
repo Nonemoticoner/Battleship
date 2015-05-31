@@ -5,19 +5,19 @@
 		function Ship (x, y, orientation, length) {
 			this.x =x;
 			this.y =y;
-			this.orientation = orientation;	// vertical - true, horizontal - false
+			this.orientation = orientation;	// vertical - ver, horizontal - hor
 			this.length = length;
 			this.hp =[];
 
-			if (this.len ==5)
+			if (this.length ==5)
 				this.type = "Aircraft Carrier";
-			else if (this.len ==4)
+			else if (this.length ==4)
 				this.type = "Battleship";
-			else if (this.len ==3)
+			else if (this.length ==3)
 				this.type = "Submarine";
-			else if (this.len ==2)
+			else if (this.length ==2)
 				this.type = "Cruiser";
-			else if (this.len ==1)
+			else if (this.length ==1)
 				this.type = "Patrol Boat";
 			else
 				this.type = "Unknown";
@@ -43,7 +43,7 @@
 	})();
 
 	var Set =(function () {
-		function Set (ships) {
+		function Set (ships_arg) {
 			//0 empty space
 			//1 ship
 			//2 killed ship
@@ -58,44 +58,42 @@
 						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 						[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
-			this.ships = ships || [];
+			this.ships = [];
+
+			typeof ships_arg =="undefined" ? ships_arg =[]: 0;
 
 			// locates all ships on map
-			for (var i = this.ships.length - 1; i >= 0; i--) {
-				this.locate(this.ships[i])
+			for (var i = ships_arg.length - 1; i >= 0; i--) {
+				this.locate(ships_arg[i]);
 			}
 		}
 
 		Set.prototype.locate = function(ship) {
-			if(ship.orientation == 'v'){
+			var temp = this.map;
+			if(ship.orientation == 'ver'){
 				for(var i =0; i <ship.length; i++){
-					try{
-						if(this.map[ship.y +i][ship.x] ==0)
-							this.map[ship.y +i][ship.x] =1;
+						if(temp[ship.y +i][ship.x] ==0)
+							temp[ship.y +i][ship.x] =1;
 						else
-							throw new Error("Ship you are trying to locate collides with another ship");
-					}
-					catch(error){
-						console.log(error);
-						return 1;
-					}
+							return 1;	// error
 				}
+				this.ships.push(ship);
+				this.map = temp;
+
+				return 0; // success
 			}
-			else if(ship.orientation == 'h'){
+			else if(ship.orientation == 'hor'){
 				for(var i =0; i <ship.length; i++){
-					try{
-						if(this.map[ship.y][ship.x +i] ==0)
-							this.map[ship.y][ship.x +1] =1;
+						if(temp[ship.y][ship.x +i] ==0)
+							temp[ship.y][ship.x +i] =1;
 						else
-							throw new Error("Ship you are trying to locate collides with another ship");
-					}
-					catch(error){
-						console.log(error);
-						return 1;
-					}
+							return 1;	// error
 				}
+				this.ships.push(ship);
+				this.map = temp;
+
+				return 0;	// success
 			}
-		
 		};
 
 		return Set;
