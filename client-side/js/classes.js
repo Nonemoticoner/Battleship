@@ -3,6 +3,7 @@
 
 	// GLOBAL VARIABLES
 	window.DOMAIN = "http://nonemoticoner.asd-ent.pl";
+	window.PORT = 3001;
 
 	var Ship =(function () {
 		function Ship (x, y, orientation, length) {

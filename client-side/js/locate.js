@@ -4,27 +4,26 @@
 	// var hash = parseInt((window.location.hash).substr(1)) || null;
 	var hash = 5;
 
-	var spans =[], span;
+	var nick = URI(window.location).query(true).nick;
+
+	// get icons
+	var spans =[], span, icons = [];;
 
 	for(var i =0; i <100; i++){
 		span = $("button:eq(" + i.toString() + ") span");
 		spans.push(span);
-
 	}
-	// console.log(spans.removeClass("glyphicon-pencil").addClass("glyphicon-remove"));
 
-	var icons = [];
 	for (var i = 0; i <10; i++) {
 		var arr =[];
 		for (var j = 0; j <10; j++)
 			arr.push(spans[j+i*10]);
 		icons.push(arr);
 	}
-	console.log(icons);
 
 	var set = new Set();
 
-	// script for locate-set.html
+	// event on click
 	$('a').on('click', function () {
 		// get data
 		var row = $(this).data().row,
@@ -49,8 +48,19 @@
 		// to next ship choosing
 		hash--;
 
-		if(!hash)
-			window.location.href = DOMAIN + "/lobby.html";
+		if(!hash){
+			// send data to server with assigning set to exact player
+			var data ={
+				map: set.map,
+				ships: set:ships
+			};
+
+			// ajax call here
+			// ...
+
+			// go to next page when done (async)
+			window.location.href = DOMAIN + "/lobby.html" + "?nick=" + nick;
+		}
 		
 	});
 

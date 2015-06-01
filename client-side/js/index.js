@@ -1,6 +1,6 @@
 (function () {
 
-	var address = "http://nonemoticoner.asd-ent.pl:3001";
+	var address = DOMAIN + ":" + PORT.toString();
 	
 	var join = $("button#submit"),
 		form = $("input");
@@ -18,7 +18,13 @@
 			}
 		}).done(function (res) {
 			console.log(res);
-			alert("sent");
+			
+
+			// go to next page when success (async)
+			if(false)
+				window.location.href = DOMAIN + "/locate-set.html" + "?nick=" + nick;
+			else
+				alert("Error: There is already such nick taken. Choose different one!");
 		});
 	});
 
