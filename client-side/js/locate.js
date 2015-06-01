@@ -1,20 +1,26 @@
 //(function () {
 
 	// which ship is set currently
-	//var hash = parseInt((window.location.hash).substr(1)) || null;
+	// var hash = parseInt((window.location.hash).substr(1)) || null;
 	var hash = 5;
 
-	var	spans = $("button:nth-child(0) span");
-	console.log(spans.removeClass("glyphicon-pencil").addClass("glyphicon-remove"));
-	var icons =[];
+	var spans =[], span;
 
-	// for (var i = 0; i <10; i++) {
-	// 	var arr =[];
-	// 	for (var j = 0; j <10; j++)
-	// 		arr.push(spans[j+i*10]);
-	// 	icons.push(arr);
-	// }
-	// console.log(icons);
+	for(var i =0; i <100; i++){
+		span = $("button:eq(" + i.toString() + ") span");
+		spans.push(span);
+
+	}
+	// console.log(spans.removeClass("glyphicon-pencil").addClass("glyphicon-remove"));
+
+	var icons = [];
+	for (var i = 0; i <10; i++) {
+		var arr =[];
+		for (var j = 0; j <10; j++)
+			arr.push(spans[j+i*10]);
+		icons.push(arr);
+	}
+	console.log(icons);
 
 	var set = new Set();
 
@@ -29,9 +35,9 @@
 		var ship = new Ship(letter2digit(col), row, or, hash);
 		if(set.locate(ship)){
 			alert("Error: Couldn't add there a ship because it collides with other ship or end of map");
+			return;
 		}
-		console.log(ship);
-		console.log(set);
+		
 		// map ship so user can see
 		for(var i =0; i <10; i++)
 			for(var j =0; j <10; j++)
@@ -42,6 +48,9 @@
 
 		// to next ship choosing
 		hash--;
+
+		if(!hash)
+			window.location.href = DOMAIN + "/lobby.html";
 		
 	});
 

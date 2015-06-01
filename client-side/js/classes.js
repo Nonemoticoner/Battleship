@@ -1,6 +1,9 @@
 // var Classes = (function () {
 // 	var Classes ={};
 
+	// GLOBAL VARIABLES
+	window.DOMAIN = "http://nonemoticoner.asd-ent.pl";
+
 	var Ship =(function () {
 		function Ship (x, y, orientation, length) {
 			this.x =x;
