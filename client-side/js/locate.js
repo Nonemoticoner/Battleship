@@ -52,7 +52,7 @@
 			// send data to server with assigning set to exact player
 			var data ={
 				map: set.map,
-				ships: set:ships
+				ships: set.ships
 			};
 
 			// ajax call here

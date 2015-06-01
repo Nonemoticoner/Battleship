@@ -2,7 +2,7 @@
 // 	var Classes ={};
 
 	// GLOBAL VARIABLES
-	window.DOMAIN = "http://nonemoticoner.asd-ent.pl";
+	window.DOMAIN = "file:///E:/AGH/OOP/Battleship/client-side";
 	window.PORT = 3001;
 
 	var Ship =(function () {
