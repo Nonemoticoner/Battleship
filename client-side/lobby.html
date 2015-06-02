@@ -25,9 +25,13 @@
 		<br>
 		<!-- here list -->
 		<ul class="list-group" id="list">
-			<li class="list-group-item">
-				<a href="#">machina</a>
-			</li>
+			<script id="playersListTemplate" type="text/x-handlebars-template">
+				{{#each players}}
+				<li class="list-group-item">
+					<a class="nickname" href="#" data-nick="{{this}}">{{this}}</a>
+				</li>
+				{{/each}}
+			</script>
 		</ul>
 		
 		<footer class="footer">
@@ -43,8 +47,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<!-- My Script -->
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<!-- Handlebars -->
+	<script src="js/handlebars-v3.0.3.js"></script>
+	<!-- URI.js -->
 	<script src="js/uri.js"></script>
+
+	<!-- My Script -->
 	<script src="js/classes.js"></script>
 	<script src="js/lobby.js"></script>
 </body>

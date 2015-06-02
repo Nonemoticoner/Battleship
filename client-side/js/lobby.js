@@ -11,18 +11,25 @@
 	}).done(function (res) {
 		console.log(res);
 
-		// template action
-		var list_template = $("#list");
+		// assign res data to nicks
+		var nicks = { players: ["machina", "yolo"] };
 
-		for (var i = list.length - 1; i >= 0; i--) {
-			
-			list_template.innerHTML += "<li class='list-group-item'><a href='#'>" + list[i] + "</a></li>";
-		}
+		// Handlebars
+		var template = Handlebars.compile( $("#playersListTemplate").html() );
+		$("ul#list").append( template(nicks) );
+
 	});
 
 	// refresh lobby list
 	$("#refresh").on("click", function () {
 		window.location.reload(true);
+	});
+
+	// catch if player was clicked
+	$("a.nickname").on("click", function () {
+		var opponent = $(this).data.nick;
+
+		window.location.href = DOMAIN + "/game.html" + "?nick=" + nick + "&opponent=" + opponent;
 	});
 	
 })();
