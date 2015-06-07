@@ -8,24 +8,29 @@
 	join.on('click', function (e) {
 		e.preventDefault();
 
-		var nick = form[0].value;
+		var nickname = form[0].value;console.log(nickname);
 
 		$.ajax({
-			type: "POST",
-			url: address + "/register",
+			type: "GET",
+			url: "http://nonemoticoner.asd-ent.pl" + ":" + PORT.toString() + "/isAvailable",
+			dataType: "jsonp",
 			data: {
-				nick: nick
+				nick: nickname
+			},
+			success: function (res) {console.log(res);
+				if(res)
+					window.location.href = DOMAIN + "/battleship/client-side/locate-set.html" + "?nick=" + nickname;
+				else
+					alert("Error: There is already such nick taken. Choose different one!");
+			},
+			error: function (error) {
+				alert("An error occured while connecting to server. See log for details.");
+				console.log(error);
 			}
-		}).done(function (res) {
-			console.log(res);
-			
-
-			// go to next page when success (async)
-			if(false)
-				window.location.href = DOMAIN + "/locate-set.html" + "?nick=" + nick;
-			else
-				alert("Error: There is already such nick taken. Choose different one!");
 		});
+
+		
+		
 	});
 
 })();

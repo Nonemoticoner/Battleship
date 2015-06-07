@@ -3,21 +3,26 @@
 	// get nick of player
 	var nick = URI(window.location).query(true).nick;
 
-	var address = DOMAIN + ":" + PORT.toString();
+	var address = "http://nonemoticoner.asd-ent.pl" + ":" + PORT.toString();
 
 	$.ajax({
 		type: "GET",
-		url: address + "/lobby"
-	}).done(function (res) {
-		console.log(res);
+		url: address + "/lobby",
+		dataType: "jsonp",
+		success: function (res) {
+			console.log(res.query.nicks);
 
-		// assign res data to nicks
-		var nicks = { players: ["machina", "yolo"] };
+			// assign res data to nicks
+			var nicks = res.query.nicks;
 
-		// Handlebars
-		var template = Handlebars.compile( $("#playersListTemplate").html() );
-		$("ul#list").append( template(nicks) );
-
+			// Handlebars
+			var template = Handlebars.compile( $("#playersListTemplate").html() );
+			$("ul#list").append( template(nicks) );
+		},
+		error: function (error) {
+			alert("An error occured while connecting to server. See log for details.");
+			console.log(error);
+		}
 	});
 
 	// refresh lobby list
@@ -29,7 +34,7 @@
 	$("a.nickname").on("click", function () {
 		var opponent = $(this).data.nick;
 
-		window.location.href = DOMAIN + "/game.html" + "?nick=" + nick + "&opponent=" + opponent;
+		window.location.href = DOMAIN + "/battleship/client-side/game.html" + "?nick=" + nick + "&opponent=" + opponent;
 	});
 	
 })();

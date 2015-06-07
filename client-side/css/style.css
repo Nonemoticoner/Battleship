@@ -1,0 +1,13 @@
+/*needs to be centered somehow*/
+#container{
+	margin-left: auto;
+	margin-right: auto;
+}
+/*needs to be taken to bottom somehow*/
+#footer{	
+	position: absolute;
+	margin-bottom: 0px;
+}
+.row-0{
+	text-decoration: none;
+}
