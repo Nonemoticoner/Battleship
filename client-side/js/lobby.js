@@ -34,7 +34,25 @@
 	$("a.nickname").on("click", function () {
 		var opponent = $(this).data.nick;
 
-		window.location.href = DOMAIN + "/battleship/client-side/game.html" + "?nick=" + nick + "&opponent=" + opponent;
+		$.ajax({
+			type: "POST",
+			url: address + "/challange",
+			dataType: "jsonp",
+			data: {
+				fighters: [nick, opponent]
+			},
+			success: function (res) {
+				if(res == "challanged")
+					alert("You have successfully challanged the player. Now one has to confirm it by challanging you as well.");
+				else if(res == "ready")
+					window.location.href = DOMAIN + "/battleship/client-side/game.html" + "?nick=" + nick + "&opponent=" + opponent;
+				else
+					alert("Something went wrong. Go back to homepage.");
+			},
+			error: function (error) {
+				alert("An error occured while connecting to server. See log for details.");
+				console.log(error);
+			}
+		});
 	});
-	
 })();

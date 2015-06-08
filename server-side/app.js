@@ -13,24 +13,108 @@ app.use(bodyParser.urlencoded({
  * CONSTANTS --------------------------------------------------------------------------------------------------------------
  */
 
-var battles =[],
-	users =[];
+var Battle =(function () {
+	function Battle (attacker, defender, users) {
+		var attSet = {}, defSet = {};
 
+		for (var i = 0; i < users.length; i++) {
+			if(users[i].nick == attacker)
+				attSet = users[i].set;
+			else if(users[i].nick == defender)
+				defSet = users[i].set;
+		}
+
+		this.turn = 0;	// incrementable
+
+		this.attacker = {
+			nick: attacker,
+			set: attSet
+		};
+		this.defender = {
+			nick: defender,
+			set: defSet
+		};
+	}
+
+	return Battle;
+})();
+
+var GLOBAL = {
+	battles =[],
+	users =[],
+	challanges = []
+};
 
 /*
  * REGISTER --------------------------------------------------------------------------------------------------------------
  */
+app.post('/attack', function (req, res) {
+	var battleNo =-1;
+
+	// find battle
+	for (var i = GLOBAL.battles.length - 1; i >= 0 && battleNo ==-1; i--) {
+		if(GLOBAL.battles[i].attacker == req.query.attacker && GLOBAL.battles[i].defender == req.query.defender)
+			battleNo =i;
+		else if(GLOBAL.battles[i].attacker == req.query.attacker && GLOBAL.battles[i].defender == req.query.defender)
+			battleNo =i;
+	}
+
+	// make a copy to operate on
+	var battle = GLOBAL.battles[battleNo];
+
+	// make objects from classes (create module) to be able to use helper functions
+	// ...
+
+	// update
+	GLOBAL.battles[battleNo] = battle;
+	
+	res.jsonp(battle);
+});
+
+/*
+ * REGISTER --------------------------------------------------------------------------------------------------------------
+ */
+
 app.post('/register', function (req, res) {
-	console.log(req.query);
+	//console.log(req.query);
 
 	var ans = true;
 
-	for (var i = users.length - 1; i >= 0; i--)
-		if(users[i].nick == req.query.nick)
+	for (var i = GLOBAL.users.length - 1; i >= 0; i--)
+		if(GLOBAL.users[i].nick == req.query.nick)
 			ans = false;
 
 	if(ans)
-		users.push(req.query);
+		GLOBAL.users.push(req.query);
+	
+	res.jsonp(ans);
+});
+
+/*
+ * CHALLANGE ------------------------------------------------------------------------------------------------------------
+ */
+app.post('/challange', function (req, res) {
+	var ans = "error",
+		fighters = req.query.fighters;
+
+	// check if challange already exists
+	for (var i = GLOBAL.challanges.length - 1; i >= 0; i--)
+		if(GLOBAL.challanges[i][0] == fighters[0] && GLOBAL.challanges[i][1] == fighters[1])
+			ans = "ready";
+		else if(GLOBAL.challanges[i][1] == fighters[1] && GLOBAL.challanges[i][0] == fighters[0])
+			ans = "ready";
+
+	// add a challange to db
+	if(ans == "error")
+		GLOBAL.challanges.push(fighters);
+
+	// add to battles 
+	if(ans == "ready"){
+		// initialize battle object
+		var battle = new Battle(fighters[0], fighters[1], GLOBAL.users);
+		
+		GLOBAL.battles.push(battle);
+	}
 	
 	res.jsonp(ans);
 });
@@ -41,8 +125,8 @@ app.post('/register', function (req, res) {
 app.get('/lobby', function (req, res) {
 	var ans = [];
 
-	for (var i = users.length - 1; i >= 0; i--)
-		ans.push(users[i].nick);
+	for (var i = GLOBAL.users.length - 1; i >= 0; i--)
+		ans.push(GLOBAL.users[i].nick);
 	
 	res.jsonp(ans);
 });
@@ -53,8 +137,8 @@ app.get('/lobby', function (req, res) {
 app.get('/isAvailable', function (req, res) {
 	var ans = true;console.log(req.query.nick);
 
-	for (var i = users.length - 1; i >= 0; i--)
-		if(users[i].nick == req.query.nick)
+	for (var i = GLOBAL.users.length - 1; i >= 0; i--)
+		if(GLOBAL.users[i].nick == req.query.nick)
 			ans = false;
 	
 	res.jsonp(ans);
