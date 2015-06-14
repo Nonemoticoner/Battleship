@@ -3,11 +3,18 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
 /*needs to be taken to bottom somehow*/
 #footer{	
 	position: absolute;
 	margin-bottom: 0px;
 }
+
 .row-0{
 	text-decoration: none;
+}
+
+table button{
+	width: 38px;
+	height: 38px;
 }
