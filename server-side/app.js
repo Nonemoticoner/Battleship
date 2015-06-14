@@ -1,7 +1,7 @@
 var express =require('express');
 var path =require('path');
-//var mysql =require('mysql');
 var bodyParser =require('body-parser');
+var bs =require('./battleship.js');
 
 var app =express();
 app.use(bodyParser.json());
@@ -40,9 +40,9 @@ var Battle =(function () {
 })();
 
 var GLOBAL = {
-	battles =[],
-	users =[],
-	challanges = []
+	battles: [],
+	users: [],
+	challanges: []
 };
 
 /*

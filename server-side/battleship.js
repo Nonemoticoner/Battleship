@@ -1,11 +1,10 @@
-// var Classes = (function () {
-// 	var Classes ={};
+var exports = module.exports = {};
 
 	// GLOBAL VARIABLES
-	window.DOMAIN = "http://nonemoticoner.asd-ent.pl";
-	window.PORT = 3001;
+	exports.DOMAIN = "http://nonemoticoner.asd-ent.pl";
+	exports.PORT = 3001;
 
-	var Ship =(function () {
+	exports.Ship= (function () {
 		function Ship (x, y, orientation, length) {
 			this.x =x;
 			this.y =y;
@@ -46,7 +45,7 @@
 		return Ship;
 	})();
 
-	var Set =(function () {
+	exports.Set= (function () {
 		function Set (ships_arg) {
 			//0 empty space
 			//1 ship
@@ -103,10 +102,10 @@
 		return Set;
 	})();
 
-	var Player =(function () {
+	exports.Player= (function () {
 		function Player(nick, status, set){
 			this.nick =nick;
-			this.set =set || new Set();
+			this.set =set || new exports.Set();
 			this.status = status || "pending";	// pending or playing
 		}
 
@@ -130,7 +129,7 @@
 		return Player;
 	})();
 
-	function letter2digit (letter) {
+	exports.letter2digit= function (letter) {
 		switch(letter){
 			case "A":
 				return 0;
@@ -154,10 +153,3 @@
 				return 9;
 		}
 	}
-
-// 	Classes.Ship = Ship;
-// 	Classes.Set = Set;
-// 	Classes.Player = Player;
-	
-// 	return Classes;
-// })();
