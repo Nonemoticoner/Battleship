@@ -130,6 +130,32 @@
 		return Player;
 	})();
 
+	var Battle =(function () {
+		function Battle (attacker, defender, users) {
+			var attSet = {}, defSet = {};
+
+			for (var i = 0; i < users.length; i++) {
+				if(users[i].nick == attacker)
+					attSet = users[i].set;
+				else if(users[i].nick == defender)
+					defSet = users[i].set;
+			}
+
+			this.turn = 0;	// incrementable
+
+			this.attacker = {
+				nick: attacker,
+				set: attSet
+			};
+			this.defender = {
+				nick: defender,
+				set: defSet
+			};
+		}
+
+		return Battle;
+	})();
+
 	function letter2digit (letter) {
 		switch(letter){
 			case "A":

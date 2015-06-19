@@ -46,7 +46,7 @@ var GLOBAL = {
 };
 
 /*
- * REGISTER --------------------------------------------------------------------------------------------------------------
+ * ATTACK --------------------------------------------------------------------------------------------------------------
  */
 app.post('/attack', function (req, res) {
 	var battleNo =-1;
@@ -76,7 +76,7 @@ app.post('/attack', function (req, res) {
  */
 
 app.post('/register', function (req, res) {
-	//console.log(req.query);
+	console.log(req.query);
 
 	var ans = true;
 
@@ -127,6 +127,22 @@ app.get('/lobby', function (req, res) {
 
 	for (var i = GLOBAL.users.length - 1; i >= 0; i--)
 		ans.push(GLOBAL.users[i].nick);
+	
+	res.jsonp(ans);
+});
+
+/*
+ * GET BATTLE -----------------------------------------------------------------------------------------------------------
+ */
+app.get('/getBattle', function (req, res) {
+	var ans = {};
+
+	// find battle
+	for (var i = GLOBAL.battles.length - 1; i >= 0; i--)
+		if(GLOBAL.battles[i].attacker.nick == res.query.nick && GLOBAL.battles[i].defender.nick == res.query.opponent)
+			ans = GLOBAL.battles[i];
+		else if(GLOBAL.battles[i].attacker.nick == res.query.opponent && GLOBAL.battles[i].defender.nick == res.query.nick)
+			ans = GLOBAL.battles[i];
 	
 	res.jsonp(ans);
 });
