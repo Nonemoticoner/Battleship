@@ -2,7 +2,9 @@
 	
 	// get uri
 	var nick = URI(window.location).query(true).nick;
-	var opponent = URI(
+	var opponent = URI(window.location).query(true).opponent;
+
+	var address = DOMAIN + ":" + PORT.toString();
 
 	// disable 'My Ships'
 	for (var i = 0; i < 100; i++) {
@@ -17,6 +19,9 @@
 		type: "GET",
 		url: address + "/getBattle",
 		dataType: "jsonp",
+		data:{
+
+		},
 		success: function (res) {
 			console.log(res);
 

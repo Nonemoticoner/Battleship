@@ -75,17 +75,17 @@ app.post('/attack', function (req, res) {
  * REGISTER --------------------------------------------------------------------------------------------------------------
  */
 
-app.post('/register', function (req, res) {
-	console.log(req.query);
-
+app.get('/register', function (req, res) {	// POST
 	var ans = true;
 
 	for (var i = GLOBAL.users.length - 1; i >= 0; i--)
 		if(GLOBAL.users[i].nick == req.query.nick)
 			ans = false;
 
-	if(ans)
-		GLOBAL.users.push(req.query);
+	if(ans){
+		var player = new bs.Player(req.query.nick, "pending", req.query.set);
+		GLOBAL.users.push(player);
+	}
 	
 	res.jsonp(ans);
 });
@@ -93,9 +93,9 @@ app.post('/register', function (req, res) {
 /*
  * CHALLANGE ------------------------------------------------------------------------------------------------------------
  */
-app.post('/challange', function (req, res) {
+app.get('/challange', function (req, res) {	// POST
 	var ans = "error",
-		fighters = req.query.fighters;
+		fighters = req.query.fighters;console.log(fighters);console.log("---------");console.log(GLOBAL.challanges);
 
 	// check if challange already exists
 	for (var i = GLOBAL.challanges.length - 1; i >= 0; i--)
@@ -105,18 +105,20 @@ app.post('/challange', function (req, res) {
 			ans = "ready";
 
 	// add a challange to db
-	if(ans == "error")
+	if(ans == "error"){
 		GLOBAL.challanges.push(fighters);
+		ans = "challanged";
+	}
 
 	// add to battles 
 	if(ans == "ready"){
 		// initialize battle object
 		var battle = new Battle(fighters[0], fighters[1], GLOBAL.users);
-		
+		console.log("Battle: -------------");console.log(battle);
 		GLOBAL.battles.push(battle);
 	}
 	
-	res.jsonp(ans);
+	res.jsonp(ans);console.log("=========");console.log(ans);
 });
 
 /*

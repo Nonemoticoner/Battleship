@@ -2,7 +2,7 @@
 // 	var Classes ={};
 
 	// GLOBAL VARIABLES
-	window.DOMAIN = "http://nonemoticoner.asd-ent.pl";
+	window.DOMAIN = "http://localhost";
 	window.PORT = 3001;
 
 	var Ship =(function () {
@@ -73,6 +73,9 @@
 		}
 
 		Set.prototype.locate = function(ship) {
+			if(typeof ship == "undefined")
+				return 1;
+
 			var temp = this.map;
 			if(ship.orientation == 'ver'){
 				for(var i =0; i <ship.length; i++){

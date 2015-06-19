@@ -72,6 +72,9 @@ var exports = module.exports = {};
 		}
 
 		Set.prototype.locate = function(ship) {
+			if(typeof ship == "undefined")
+				return 1;
+
 			var temp = this.map;
 			if(ship.orientation == 'ver'){
 				for(var i =0; i <ship.length; i++){

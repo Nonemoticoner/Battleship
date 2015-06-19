@@ -3,17 +3,15 @@
 	// get nick of player
 	var nick = URI(window.location).query(true).nick;
 
-	var address = "http://nonemoticoner.asd-ent.pl" + ":" + PORT.toString();
+	var address = DOMAIN + ":" + PORT.toString();
 
 	$.ajax({
 		type: "GET",
 		url: address + "/lobby",
 		dataType: "jsonp",
 		success: function (res) {
-			console.log(res.query.nicks);
-
 			// assign res data to nicks
-			var nicks = res.query.nicks;
+			var nicks = { players: res };
 
 			// Handlebars
 			var template = Handlebars.compile( $("#playersListTemplate").html() );
@@ -31,8 +29,11 @@
 	});
 
 	// catch if player was clicked
-	$("a.nickname").on("click", function () {
-		var opponent = $(this).data.nick;
+	$("ul#list").on("click", "a.nickname", function(e) {
+
+		e.preventDefault();
+
+		var opponent = $(this).context.dataset.nick;
 
 		$.ajax({
 			type: "POST",
@@ -45,7 +46,7 @@
 				if(res == "challanged")
 					alert("You have successfully challanged the player. Now one has to confirm it by challanging you as well.");
 				else if(res == "ready")
-					window.location.href = DOMAIN + "/battleship/client-side/game.html" + "?nick=" + nick + "&opponent=" + opponent;
+					window.location.href = "game.html" + "?nick=" + nick + "&opponent=" + opponent;
 				else
 					alert("Something went wrong. Go back to homepage.");
 			},

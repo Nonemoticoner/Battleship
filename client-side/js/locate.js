@@ -31,7 +31,7 @@
 			or = $(this).data().or;
 
 		// create ship
-		var ship = new Ship(letter2digit(col), row, or, hash);console.log(ship);
+		var ship = new Ship(letter2digit(col), row, or, hash);
 		if(set.locate(ship)){
 			alert("Error: Couldn't add there a ship because it collides with other ship or end of map");
 			return;
@@ -52,18 +52,18 @@
 			var dataToSend ={
 				nick: nick,
 				set: set
-			};console.log(dataToSend);
+			};
 
 			// ajax call here
 			$.ajax({
 				type: "POST",
-				url: "http://nonemoticoner.asd-ent.pl:" + PORT.toString() + "/register",
+				url: DOMAIN + ":" + PORT.toString() + "/register",
 				dataType: "jsonp",
 				data: dataToSend,
 				success: function (res) {
 					// go to next page when done (async)
 					if(res)
-						window.location.href = DOMAIN + "/battleship/client-side/lobby.html" + "?nick=" + nick;
+						window.location.href = "lobby.html" + "?nick=" + nick;
 					else
 						alert("Something went wrong. Go to homepage and try again.");
 					
@@ -72,7 +72,7 @@
 					alert("An error occured while connecting to server. See log for details.");
 					console.log(error);
 				}
-			});	
+			});
 		}
 	});
 

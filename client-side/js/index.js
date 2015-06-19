@@ -12,14 +12,14 @@
 
 		$.ajax({
 			type: "GET",
-			url: "http://nonemoticoner.asd-ent.pl" + ":" + PORT.toString() + "/isAvailable",
+			url: address + "/isAvailable",
 			dataType: "jsonp",
 			data: {
 				nick: nickname
 			},
 			success: function (res) {console.log(res);
 				if(res)
-					window.location.href = DOMAIN + "/battleship/client-side/locate-set.html" + "?nick=" + nickname;
+					window.location.href = "locate-set.html" + "?nick=" + nickname;
 				else
 					alert("Error: There is already such nick taken. Choose different one!");
 			},
