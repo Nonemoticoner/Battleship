@@ -114,6 +114,9 @@
 		}
 
 		Player.prototype.attackedBy = function(opponent, x, y) {
+			if(typeof this.set == "undefined")	// freak call protection
+				return -1;
+
 			if(this.set.map[y][x] ==0){
 				this.set.map[y][x] =3;
 				return 0;
@@ -135,25 +138,17 @@
 
 	var Battle =(function () {
 		function Battle (attacker, defender, users) {
-			var attSet = {}, defSet = {};
+			this.turn = 0;	// incrementable
+
+			this.attacker = {};
+			this.defender = {};
 
 			for (var i = 0; i < users.length; i++) {
 				if(users[i].nick == attacker)
-					attSet = users[i].set;
+					this.attacker = users[i];
 				else if(users[i].nick == defender)
-					defSet = users[i].set;
+					this.defender = users[i];
 			}
-
-			this.turn = 0;	// incrementable
-
-			this.attacker = {
-				nick: attacker,
-				set: attSet
-			};
-			this.defender = {
-				nick: defender,
-				set: defSet
-			};
 		}
 
 		return Battle;
