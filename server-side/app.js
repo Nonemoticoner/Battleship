@@ -95,7 +95,7 @@ app.get('/register', function (req, res) {	// POST
  */
 app.get('/challange', function (req, res) {	// POST
 	var ans = "error",
-		fighters = req.query.fighters;console.log(fighters);console.log("---------");console.log(GLOBAL.challanges);
+		fighters = req.query.fighters;
 
 	// check if challange already exists
 	for (var i = GLOBAL.challanges.length - 1; i >= 0; i--)
@@ -114,11 +114,11 @@ app.get('/challange', function (req, res) {	// POST
 	if(ans == "ready"){
 		// initialize battle object
 		var battle = new Battle(fighters[0], fighters[1], GLOBAL.users);
-		console.log("Battle: -------------");console.log(battle);
+		
 		GLOBAL.battles.push(battle);
 	}
 	
-	res.jsonp(ans);console.log("=========");console.log(ans);
+	res.jsonp(ans);
 });
 
 /*
@@ -141,9 +141,9 @@ app.get('/getBattle', function (req, res) {
 
 	// find battle
 	for (var i = GLOBAL.battles.length - 1; i >= 0; i--)
-		if(GLOBAL.battles[i].attacker.nick == res.query.nick && GLOBAL.battles[i].defender.nick == res.query.opponent)
+		if(GLOBAL.battles[i].attacker.nick == req.query.nick && GLOBAL.battles[i].defender.nick == req.query.opponent)
 			ans = GLOBAL.battles[i];
-		else if(GLOBAL.battles[i].attacker.nick == res.query.opponent && GLOBAL.battles[i].defender.nick == res.query.nick)
+		else if(GLOBAL.battles[i].attacker.nick == req.query.opponent && GLOBAL.battles[i].defender.nick == req.query.nick)
 			ans = GLOBAL.battles[i];
 	
 	res.jsonp(ans);
@@ -153,7 +153,7 @@ app.get('/getBattle', function (req, res) {
  * IS AVAILABLE ---------------------------------------------------------------------------------------------------------
  */
 app.get('/isAvailable', function (req, res) {
-	var ans = true;console.log(req.query.nick);
+	var ans = true;
 
 	for (var i = GLOBAL.users.length - 1; i >= 0; i--)
 		if(GLOBAL.users[i].nick == req.query.nick)

@@ -14,32 +14,63 @@
 	// local battle
 	var battle = {};
 
-	// download battle
+	// DOM
+	var nick_map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+	opponent_map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
+	// download battle on the beginning of game
 	$.ajax({
 		type: "GET",
 		url: address + "/getBattle",
 		dataType: "jsonp",
-		data:{
-
+		data: {
+			nick: nick,
+			opponent: opponent
 		},
 		success: function (res) {
-			console.log(res);
-
 			// add data to local objects
-			battle = res.query;
+			battle = res;
 			
-			// My ships
-			// map data to html
-			var vector = [];
+			// get DOM
+			for (var i = 0, x = 0; i < 10; i++)
+				for (var j = 0; j < 10; j++, x++)
+					nick_map[i][j] = ($($("#nick button")[x]));
 
-			// map => vector
-			for (var i = 0; i < 10; i++)
-				for (var j = 0; j < 10; j++)
-					vector.push(map[i][j]);
+			for (var i = 0, x = 0; i < 10; i++)
+				for (var j = 0; j < 10; j++, x++)
+					opponent_map[i][j] = ($($("#opponent button")[x]));
 
-
-			
-
+			// map nick ships
+			if(battle.attacker.nick == nick){
+				for (var i = 0; i < 10; i++)
+					for (var j = 0; j < 10; j++)
+						if(battle.attacker.set.map[i][j] == 1)
+							$(nick_map[i][j].context.firstChild).addClass("glyphicon-stop");
+			}
+			else if(battle.attacker.nick == opponent){
+				for (var i = 0; i < 10; i++)
+					for (var j = 0; j < 10; j++)
+						if(battle.defender.set.map[i][j] == 1)
+							$(nick_map[i][j].context.firstChild).addClass("glyphicon-stop");
+			}
 
 
 		},
@@ -48,5 +79,8 @@
 			console.log(error);
 		}
 	});
+
+	// attack listener
+	
 
 })();
