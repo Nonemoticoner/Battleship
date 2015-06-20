@@ -24,27 +24,29 @@ var GLOBAL = {
 /*
  * ATTACK --------------------------------------------------------------------------------------------------------------
  */
-app.post('/attack', function (req, res) {
+app.get('/attack', function (req, res) {	// POST
 	var battleNo =-1;
 
 	// find battle
 	for (var i = GLOBAL.battles.length - 1; i >= 0 && battleNo ==-1; i--) {
-		if(GLOBAL.battles[i].attacker == req.query.attacker && GLOBAL.battles[i].defender == req.query.defender)
+		if(GLOBAL.battles[i].attacker.nick == req.query.attacker.nick && GLOBAL.battles[i].defender.nick == req.query.defender.nick)
 			battleNo =i;
-		else if(GLOBAL.battles[i].attacker == req.query.attacker && GLOBAL.battles[i].defender == req.query.defender)
+		else if(GLOBAL.battles[i].attacker.nick == req.query.attacker.nick && GLOBAL.battles[i].defender.nick == req.query.defender.nick)
 			battleNo =i;
 	}
 
-	// make a copy to operate on
-	var battle = GLOBAL.battles[battleNo];
-
-	// make objects from classes (create module) to be able to use helper functions
-	// ...
-
 	// update
-	GLOBAL.battles[battleNo] = battle;
-	
-	res.jsonp(battle);
+	if(battleNo !=-1){
+		// initialize battle object
+		var battle = new Battle(req.query.attacker.nick, req.query.defender.nick, [req.query.attacker, req.query.defender]);
+		battle.turn = req.query.turn;
+
+		GLOBAL.battles[battleNo] = battle;
+
+		res.jsonp(true);
+	}
+	else
+		res.jsonp(false);
 });
 
 /*
