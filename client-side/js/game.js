@@ -6,9 +6,16 @@
 
 	var address = DOMAIN + ":" + PORT.toString();
 
+	var isAttacker = undefined;
+
 	// disable 'My Ships'
 	for (var i = 0; i < 100; i++) {
 		$($("#nick table button")[i]).addClass("disabled");
+	}
+
+	// disable 'Enemy Ships'
+	for (var i = 0; i < 100; i++) {
+		$($("#opponent table button")[i]).addClass("disabled");
 	}
 
 	// local battle
@@ -48,6 +55,9 @@
 		success: function (res) {
 			// add data to local objects
 			battle = res;
+
+			// update isAttacker
+			(battle.attacker.nick == nick) ? isAttacker = true : isAttacker = false;
 			
 			// get DOM
 			for (var i = 0, x = 0; i < 10; i++)
@@ -59,19 +69,28 @@
 					opponent_map[i][j] = ($($("#opponent button")[x]));
 
 			// map nick ships
-			if(battle.attacker.nick == nick){
+			if(isAttacker){
 				for (var i = 0; i < 10; i++)
 					for (var j = 0; j < 10; j++)
 						if(battle.attacker.set.map[i][j] == 1)
 							$(nick_map[i][j].context.firstChild).addClass("glyphicon-stop");
 			}
-			else if(battle.attacker.nick == opponent){
+			else{
 				for (var i = 0; i < 10; i++)
 					for (var j = 0; j < 10; j++)
 						if(battle.defender.set.map[i][j] == 1)
 							$(nick_map[i][j].context.firstChild).addClass("glyphicon-stop");
 			}
 
+			// check if my turn
+			if(isAttacker && battle.turn%2 == 0)
+				for (var i = 0; i < 100; i++)
+					$($("#opponent table button")[i]).removeClass("disabled");
+				
+			else if(!isAttacker && battle.turn%2 == 1)
+				for (var i = 0; i < 100; i++) 
+					$($("#opponent table button")[i]).removeClass("disabled");
+			
 
 		},
 		error: function (error) {
@@ -81,6 +100,22 @@
 	});
 
 	// attack listener
-	
+	$("#opponent button").on("click", function () {
+		
+		// attack locally
+		if(isAttacker){
+			//battle.defender.attackedBy(battle.attacker);
+		}
+		else{
+
+		}
+
+		// send updated battle object to server
+		// ...
+
+	});
+
+	// refresh button
+	// ...
 
 })();

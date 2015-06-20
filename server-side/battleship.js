@@ -1,9 +1,5 @@
 var exports = module.exports = {};
 
-	// GLOBAL VARIABLES
-	exports.DOMAIN = "http://nonemoticoner.asd-ent.pl";
-	exports.PORT = 3001;
-
 	exports.Ship= (function () {
 		function Ship (x, y, orientation, length) {
 			this.x =x;
@@ -130,6 +126,32 @@ var exports = module.exports = {};
 		};
 
 		return Player;
+	})();
+
+	exports.Battle =(function () {
+		function Battle (attacker, defender, users) {
+			var attSet = {}, defSet = {};
+
+			for (var i = 0; i < users.length; i++) {
+				if(users[i].nick == attacker)
+					attSet = users[i].set;
+				else if(users[i].nick == defender)
+					defSet = users[i].set;
+			}
+
+			this.turn = 0;	// incrementable
+
+			this.attacker = {
+				nick: attacker,
+				set: attSet
+			};
+			this.defender = {
+				nick: defender,
+				set: defSet
+			};
+		}
+
+		return Battle;
 	})();
 
 	exports.letter2digit= function (letter) {
