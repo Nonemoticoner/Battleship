@@ -133,6 +133,20 @@
 				return -1;		//fail
 		};
 
+		Object.defineProperty(Player.prototype, "isDead", {
+			get: function(){
+				for (var i = 0; i < 10; i++) {
+					for (var j = 0; j < 10; j++) {
+						if(parseInt(this.set.map[i][j]) == 1)
+							return false;
+					}
+				}
+				return true;
+			},
+			enumerable: true,
+			configurable: true
+		});
+
 		return Player;
 	})();
 

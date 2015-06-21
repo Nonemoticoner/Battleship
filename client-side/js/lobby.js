@@ -10,6 +10,9 @@
 		url: address + "/lobby",
 		dataType: "jsonp",
 		success: function (res) {
+			// remove my nick from list
+			res.splice(res.indexOf(nick), 1);
+
 			// assign res data to nicks
 			var nicks = { players: res };
 

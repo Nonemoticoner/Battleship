@@ -75,11 +75,11 @@
 			// get DOM
 			for (var i = 0, x = 0; i < 10; i++)
 				for (var j = 0; j < 10; j++, x++)
-					nick_map[i][j] = ($($("#nick button")[x]));
+					nick_map[i][j] = ($($("#nick table button")[x]));
 
 			for (var i = 0, x = 0; i < 10; i++)
 				for (var j = 0; j < 10; j++, x++)
-					opponent_map[i][j] = ($($("#opponent button")[x]));
+					opponent_map[i][j] = ($($("#opponent table button")[x]));
 
 			// map ships on map
 			if(isAttacker){
@@ -202,10 +202,18 @@
 				console.log(error);
 			}
 		});
+		
+		// check if won
+		if((isAttacker && battle.attacker.isDead) || (!isAttacker && battle.defender.isDead))
+			alert("You LOST!");
+		else if((!isAttacker && battle.attacker.isDead) || (isAttacker && battle.defender.isDead))
+			alert("You WON!");
 
 	});
 
 	// refresh button
-	// ...
+	$("#refresh").on("click", function () {
+		window.location.reload(true);
+	});
 
 })();
