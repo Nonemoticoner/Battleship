@@ -8,7 +8,7 @@
 	join.on('click', function (e) {
 		e.preventDefault();
 
-		var nickname = form[0].value;console.log(nickname);
+		var nickname = form[0].value;
 
 		$.ajax({
 			type: "GET",
