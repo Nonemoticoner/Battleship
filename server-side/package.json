@@ -1,6 +1,6 @@
 {
   "name": "Battleship",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Web app for passing the OOP course.",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "url": "https://github.com/Nonemoticoner/Battleship/issues"
   },
   "dependencies": {
-    "express": "~4.12.3",
-    "path": "~0.11.14"
+    "express": "^4.12.3",
+    "body-parser": "^1.12.3"
   }
 }
